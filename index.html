@@ -13,97 +13,81 @@
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
 
-    h3{
-      background-color: #ffede0;
+    h4{
+      background-color: #0f0f0fce;
     }
 
-    /* .active {
+    .active {
       background-color: #ffede0;
-      border: 1px solid #ff7d1a;
-    } */
+      border: 2px solid #ff7d1a;
+    } 
   </style>
 
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="flex flex-col items-center justify-center relative">
 
-  <div class="overlay absolute inset-o w-full h-full bg-[#00000033] hidden z-10"></div>
+  <div id="overlay" class="absolute flex justify-center items-center inset-o w-full h-full bg-[#0f0f0fce] hidden z-10"></div>
 
   <main class="">
-    <div class="flex w-full items-center justify-between px-12 mb-10 border-2 border-gray-200">
-        <div class="flex justify-center gap-0">
-          <div id="menu" class="md:hidden">
-            <img src="images/icon-menu.svg" alt="menu icon">
-          </div>
-          <div class="w-50">
-            <img src="images/logo.svg" alt="logo image">
-          </div>
-    
-          <nav id="nav-bar">
-            <ul class="flex items-center gap-3">
-              <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Collections</ul>
-              <ul class=" cursor-pointer">Men</ul>
-              <ul class=" cursor-pointer">Women</ul>
-              <ul class=" cursor-pointer">About</ul>
-              <ul class=" cursor-pointer">Contact</ul>
-            </ul>
-          </nav>
-        </div>
-    
-        <div class="right-top-bar flex items-center gap-6">
-          <div>
-            <div id="cart" class="cursor-pointer relative">
-              <img src="images/icon-cart.svg" alt="cart icon">
-              <span id="cart-number" class="bg-[#ff7d1a] rounded-lg px-2 absolute -top-2 -right-2 min-h-[80%] text-[0.625rem] text-[#fff] hidden">0</span>
+    <div class="flex flex-col mb-10 px-4 md:px-12 gap-1">
+      <div 
+        class="flex w-full items-center justify-between">
+          <div class="flex justify-center items-center gap-4 md:gap-0">
+            <div id="menu" class="md:hidden">
+              <img src="images/icon-menu.svg" alt="menu icon">
             </div>
+            <div class="w-25 md:w-50">
+              <img src="images/logo.svg" alt="logo image">
+            </div>
+      
+            <nav id="nav-bar" class="">
+              <ul class="flex items-center gap-3 hidden md:flex">
+                <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Collections</ul>
+                <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Men</ul>
+                <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Women</ul>
+                <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">About</ul>
+                <ul class="py-3 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Contact</ul>
+              </ul>
+            </nav>
+          </div>
+      
+          <div class="right-top-bar flex items-center gap-6">
+            <div>
+              <div id="cart" class="cursor-pointer relative">
+                <img src="images/icon-cart.svg" alt="cart icon">
+                <span id="cart-number" class="bg-[#ff7d1a] rounded-lg px-2 absolute -top-2 -right-2 min-h-[80%] text-[0.625rem] text-[#fff] hidden">0</span>
+              </div>
 
-            <div id="open-cart" class="absolute top-10 right-20 hidden">
-              <h3 class="font-bold mb-6">Cart</h3>
-              <hr class="border-2 border-black">
+              <div id="open-cart" class="bg-[#fff] border-2 border-black w-[23%] h-[35%] absolute top-13 right-12 hidden z-10">
+                <h3 class="font-bold mb-6">Cart</h3>
+                <hr class="border-1 border-gray-200">
 
-              <div class="cart-details">
-                <div class="flex items-center gap-3">
-                  <div class="w-[15%]">
-                    <img src="images/image-product-1-thumbnail.jpg">
-                  </div>
-  
-                  <div>
-                    <p>
-                      Fall Limited Edition Sneakers
-                    </p>
-  
-                    <p class="qtyAndPrice">
-                      $125.00 x3 <span>$375.00</span>
-                    </p>
-                  </div>
-  
-                  <div>
-                    <img src="images/icon-delete.svg">
-                  </div>
+                <div class="cart-details flex flex-col justify-center items-center p-4">
                 </div>
-  
-                <button class="rounded-lg bg-[#ff7d1a] w-full">Checkout</button>
               </div>
             </div>
-          </div>
-    
-          <div class="w-12 cursor-pointer">
-            <img class="w-[100%] rounded-full hover:border-1 border-[#ff7d1a]" src="images/image-avatar.png" alt="avatar image">
+      
+            <div class="w-7 md:w-12 cursor-pointer">
+              <img class="w-[100%] rounded-full hover:border-1 border-[#ff7d1a]" src="images/image-avatar.png" alt="avatar image">
+            </div>
           </div>
         </div>
-          <!-- <hr class="border-2 border-gray-200"> -->
-      </div>
-      <div class="flex items-center">
+
+        <hr class="border-1 border-gray-200">
+    </div>
+      
+      <div class="flex flex-col md:flex-row justify-center gap-10 md:gap-0 items-center relative">
         <!-- Product image section -->
-        <div class="flex flex-col items-center w-1/3 gap-4">
-          <div class="w-[80%] rounded-lg">
+        <div class="flex flex-col items-center w-full md:w-1/2 px-4 gap-4">
+          <div class=" w-full md:w-[60%] rounded-lg">
             <img id="product-image" class="product-image rounded-lg" src="images/image-product-1.jpg" alt="product image">
           </div>
     
-          <div class="flex justify-center w-[80%] gap-2 flex-1">
+          <div class="flex justify-center w-full md:w-[60%] gap-2 flex-1">
             <div 
-              class="product-thumbnail w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-              <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
+              class="product-thumbnail w-[50%] rounded-lg cursor-pointer">
+              <img class="rounded-lg hover:bg-[#ffede0]" src="images/image-product-1-thumbnail.jpg">
             </div>
     
             <div 
@@ -123,9 +107,9 @@
           </div>
         </div>
     
-        <div class="w-1/3 flex flex-col gap-3"> 
-          <div>
-            <p class="text-[0.75rem] text-[#c4c4c4]">
+        <div class="w-full md:w-1/2 flex flex-col gap-9 px-4"> 
+          <div class="w-full md:w-1/2">
+            <p class="text-[0.975rem] text-[#c4c4c4] font-semibold mb-2">
               Sneaker Company
             </p>
       
@@ -134,22 +118,24 @@
             </h2>
           </div>
           
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-3 w-full md:w-[70%]">
             <p class="text-[#c4c4c4]">
               These low-profile sneakers are your perfect casual wear companion. Featuring a 
               durable rubber outer sole, they’ll withstand everything the weather can offer.
             </p>
-      
-            <div class="flex gap-2 items-center">
-              <p class="font-bold text-[1.5rem]">$125.00</p>
-      
-              <span class="bg-[#000] text-[#fff] text-[0.75rem] px-3 py-1 rounded-lg">50%</span>
+            
+            <div class="flex md:flex-col flex-row justify-between items-center md:items-start">
+              <div class="flex gap-2 items-center">
+                <p class="font-bold text-[1.5rem]">$125.00</p>
+        
+                <span class="bg-[#000] text-[#fff] text-[0.75rem] px-3 py-1 rounded-lg">50%</span>
+              </div>
+        
+              <p class="">$250.00</p>
             </div>
       
-            <p>$250.00</p>
-      
-            <div class="flex gap-3 w-full">
-              <div id="addMinusContainer" class="flex items-center justify-evenly w-1/3 gap-2 bg-[#ccc] px-5 py-2">
+            <div class="flex flex-col md:flex-row gap-3 w-full">
+              <div id="addMinusContainer" class="flex items-center justify-evenly w-full md:w-1/3 gap-2 bg-[#ccc] px-5 py-2 rounded-lg">
                 <span id="minus-btn" class="cursor-pointer">
                   <img src="images/icon-minus.svg" alt="minus icon to reduce cart">
                 </span>
@@ -161,59 +147,61 @@
               </div>
       
               <button id="add-to-cart"
-                class="flex items-center justify-center gap-2 w-1/2 
+                class="flex items-center justify-center gap-2 w-full 
                 rounded-lg px-7 py-3 bg-[#ff7d1a] cursor-pointer">
-                <img src="images/icon-cart.svg" alt="cart icon">
+                <img class="" src="images/icon-cart.svg" alt="cart icon">
                 Add to cart
               </button>
             </div>
           </div>
         </div>
+
+
+
+        <section id="overlay-section" class="w-full h-full flex items-center justify-center hidden z-20 absolute left-20 top-10">
+          <div class="flex flex-col items-center w-1/3 gap-4">
+            <div class="w-full rounded-lg relative">
+              <img id="product-image" class="product-image rounded-lg" src="images/image-product-1.jpg" alt="product 1 image">
+    
+              <span id="prev" class="absolute -left-4 top-40 bg-[#fff] p-4 rounded-full">
+                <img id="prev" src="images/icon-previous.svg" alt="icon previous">
+              </span>
+    
+              <span id="next" class="absolute -right-4 top-40 bg-[#fff] p-4 rounded-full">
+                <img id="next" src="images/icon-next.svg" alt="icon-next">
+              </span>
+            </div>
+      
+            <div class="flex justify-center w-[80%] gap-2 flex-1">
+              <div id="product-thumbnail" 
+                class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+                <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
+              </div>
+      
+              <div id="product-thumbnail" 
+                class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+                <img class="rounded-lg" src="images/image-product-2-thumbnail.jpg">
+              </div>
+      
+              <div id="product-thumbnail" 
+                class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+                <img class="rounded-lg" src="images/image-product-3-thumbnail.jpg">
+              </div>
+      
+              <div id="product-thumbnail" 
+                class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+                <img class="rounded-lg" src="images/image-product-4-thumbnail.jpg">
+              </div>
+            </div>
+          </div>
+        </section>
     </div>
-
-    <section id="overlay-section" class="">
-      <div class="flex flex-col items-center w-1/3 gap-4">
-        <div id="product-image" class="w-[80%] rounded-lg relative">
-          <img class="rounded-lg" src="images/image-product-1.jpg" alt="product 1 image">
-
-          <span class="absolute -left-0 top-40 bg-[#fff] p-4 rounded-full">
-            <img src="images/icon-previous.svg" alt="icon previous">
-          </span>
-
-          <span class="absolute right-0 top-40 bg-[#fff] p-4 rounded-full">
-            <img src="images/icon-next.svg" alt="icon-next">
-          </span>
-        </div>
-  
-        <div class="flex justify-center w-[80%] gap-2 flex-1">
-          <div id="product-thumbnail" 
-            class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-            <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
-          </div>
-  
-          <div id="product-thumbnail" 
-            class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-            <img class="rounded-lg" src="images/image-product-2-thumbnail.jpg">
-          </div>
-  
-          <div id="product-thumbnail" 
-            class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-            <img class="rounded-lg" src="images/image-product-3-thumbnail.jpg">
-          </div>
-  
-          <div id="product-thumbnail" 
-            class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-            <img class="rounded-lg" src="images/image-product-4-thumbnail.jpg">
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
   
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Abdulsamad</a>.
-  </div>
+  </div> -->
 
   <script src="script.js"></script>
 </body>
