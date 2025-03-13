@@ -2,17 +2,20 @@ const addToCart = document.getElementById('add-to-cart');
 const cartNumber = document.getElementById('cart-number');
 const cart = document.getElementById('cart');
 const cartSection = document.getElementById('open-cart');
-const menu = document.getElementById('menu');
+
+const menuBtn = document.getElementById('menu-btn');
+const closeBtn = document.getElementById('close-btn');
 const navBar = document.getElementById('nav-bar');
 
-menu.addEventListener('click', () => {
-    navBar.classList.toggle('hidden');
 
-    if (navBar.classList.contains('hidden')) {
-        menu.src = 'images/icon-menu.svg';
-    } else {
-        menu.src = 'images/icon-close.svg';
-    }
+menuBtn.addEventListener('click', () => {
+    navBar.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+});
+
+closeBtn.addEventListener('click', () => {
+    navBar.classList.add('hidden');
+    overlay.classList.add('hidden');
 });
 
 let cartCount = document.getElementById('cart-count');
@@ -57,11 +60,6 @@ const productImage = document.getElementById('product-image');
 const overlay = document.getElementById('overlay');
 const overlaySection = document.getElementById('overlay-section');
 
-document.addEventListener('DOMContentLoaded', () => {
-    let currentProduct = 0;
-    //const {image} = products[currentProduct];
-});
-
 const closeModal = document.getElementById('close-modal');
 
 closeModal.addEventListener('click', () => {
@@ -74,17 +72,17 @@ const imageModal = document.getElementById('product2');
 
 const thumbnailModal = document.querySelectorAll('.product-thumbnail-modal');
 
-let currentProduct = 0;
+let i = 0;
+const products = [
+    'images/image-product-1.jpg',
+    'images/image-product-2.jpg',
+    'images/image-product-3.jpg',
+    'images/image-product-4.jpg'
+];
 function changeProduct() {
     const next = document.getElementById('next');
     const prev = document.getElementById('prev');
-    const products = [
-        'images/image-product-1.jpg',
-        'images/image-product-2.jpg',
-        'images/image-product-3.jpg',
-        'images/image-product-4.jpg'
-    ];
-    let i = 0;
+    //let i = 0;
     console.log(products[i]);
 
     next.addEventListener('click', () => {
@@ -103,6 +101,23 @@ function changeProduct() {
 }
 
 changeProduct();
+
+const mainNext = document.getElementById('mainNext');
+const mainPrev = document.getElementById('mainPrev');
+
+mainNext.addEventListener('click', () => {
+    if (productImage) {
+        i = (i + 1) % products.length;
+        productImage.src = products[i];
+    }
+});
+
+mainPrev.addEventListener('click', () => {
+    if (imageModal) {
+        i = (i - 1 + products.length) % products.length;
+        productImage.src = products[i];
+    }
+});
 
 thumbnailModal.forEach((btn, index) => {
     btn.addEventListener('click', () => {
@@ -127,15 +142,15 @@ thumbnailModal.forEach((btn, index) => {
     });
 });
 
+const activeBg = document.querySelectorAll('.active-bg');
 
-
-
-productImage.addEventListener('click', (event) => {
-    console.log('slider');
-    overlay.classList.remove('hidden');
-    overlaySection.classList.remove('hidden');
+activeBg.forEach(bg => {
+    bg.addEventListener('click', () => {
+        activeBg.forEach(bg => bg.classList.remove('active-bg'));
+        bg.classList.add('active-bg');
+    });
 });
-
+    //btn.classList.add('active-bg');
 thumbnail.forEach((btn, index) => {
     btn.addEventListener('click', () => {
         thumbnail.forEach(btn => btn.classList.remove('active'));
@@ -174,7 +189,7 @@ cart.addEventListener('click', () => {
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center gap-3">
                         <div class="w-[15%]">
-                            <img src="images/image-product-1-thumbnail.jpg">
+                            <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
                         </div>
         
                         <div>
@@ -187,12 +202,12 @@ cart.addEventListener('click', () => {
                         </div>
                     </div>
         
-                    <div class="delete-cart">
+                    <div class="delete-cart w-[20px]">
                         <img class="delete-cart cursor-pointer" src="images/icon-delete.svg">
                     </div>
                 </div>
     
-                  <button id="checkout-btn" class="rounded-lg bg-[#ff7d1a] w-full py-2 font-semibold cursor-pointer">Checkout</button>
+                  <button id="checkout-btn" class="rounded-lg bg-[#ff7d1a] w-full py-3 font-semibold cursor-pointer">Checkout</button>
             `;
             cartDetails.innerHTML = HTML;
 
@@ -220,7 +235,39 @@ cart.addEventListener('click', () => {
         }
     }
 
-    // if (cartQuantity === 0) {
-    //     cartDetails.innerHTML = 'Your cart is empty';
-    // }
 });
+
+const image = document.getElementById('bg-image');
+function resizeWindow() {
+    if (window.innerWidth <= 768) {
+        overlay.classList.add('hidden');
+        overlaySection.classList.add('hidden');
+        if (productImage) {
+            productImage.removeEventListener('click', () => {
+                console.log('slider');
+                overlay.classList.remove('hidden');
+                overlaySection.classList.remove('hidden');
+            });
+        }    
+    } else if (window.innerWidth >= 768) {
+        if (productImage) {
+            productImage.addEventListener('click', (event) => {
+                console.log('slider');
+                overlay.classList.remove('hidden');
+                overlaySection.classList.remove('hidden');
+            });
+        } 
+    }
+}
+
+if (productImage) {
+    resizeWindow();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => { 
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resizeWindow, 250)
+    });
+} else {
+    console.log('background not found');
+}
