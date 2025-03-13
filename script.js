@@ -52,25 +52,6 @@ addToCart.addEventListener('click', () => {
     cartNumber.innerText = cartQuantity;
 });
 
-const products = [{
-    product1: {
-        id: '1',
-        Image: 'images/image-product-1.jpg',
-    },
-        product2: {
-            id: '2',
-            image: 'images/image-product-2.jpg'
-    } ,  
-    product3: {
-        id: '3',
-        image: 'images/image-product-3.jpg'
-    },
-    product4: {
-        id: '4',
-        image: 'images/image-product-4.jpg'
-    } 
-}];
-
 const thumbnail = document.querySelectorAll('.product-thumbnail');
 const productImage = document.getElementById('product-image');
 const overlay = document.getElementById('overlay');
@@ -78,22 +59,79 @@ const overlaySection = document.getElementById('overlay-section');
 
 document.addEventListener('DOMContentLoaded', () => {
     let currentProduct = 0;
-    const {image} = products[currentProduct];
+    //const {image} = products[currentProduct];
+});
+
+const closeModal = document.getElementById('close-modal');
+
+closeModal.addEventListener('click', () => {
+    console.log('close modal');
+    overlay.classList.add('hidden');
+    overlaySection.classList.add('hidden');
+});
+
+const imageModal = document.getElementById('product2');
+
+const thumbnailModal = document.querySelectorAll('.product-thumbnail-modal');
+
+let currentProduct = 0;
+function changeProduct() {
     const next = document.getElementById('next');
     const prev = document.getElementById('prev');
+    const products = [
+        'images/image-product-1.jpg',
+        'images/image-product-2.jpg',
+        'images/image-product-3.jpg',
+        'images/image-product-4.jpg'
+    ];
+    let i = 0;
+    console.log(products[i]);
+
+    next.addEventListener('click', () => {
+        if (imageModal) {
+            i = (i + 1) % products.length;
+            imageModal.src = products[i];
+        }
+    });
+
+    prev.addEventListener('click', () => {
+        if (imageModal) {
+            i = (i - 1 + products.length) % products.length;
+            imageModal.src = products[i];
+        }
+    });
+}
+
+changeProduct();
+
+thumbnailModal.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        thumbnailModal.forEach(btn => btn.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (index === 0) {
+            imageModal.src = 'images/image-product-1.jpg';
+            console.log('item 1');
+        } else if (index === 1) {
+            imageModal.src = 'images/image-product-2.jpg';
+            console.log('item 2');
+        } else if (index === 2) {
+            imageModal.src = 'images/image-product-3.jpg';
+            console.log('item 3');
+        } else if (index === 3) {
+            imageModal.src = 'images/image-product-4.jpg';
+            console.log('item 4');
+        } else {
+            console.log("can't find product");
+        }
+    });
 });
+
+
 
 
 productImage.addEventListener('click', (event) => {
     console.log('slider');
-    // if (event.target.classList.contains('next')) {
-    //     console.log('next');
-    //     currentProduct = (currentProduct + 1) % products.length;
-    //     productImage.src = currentProduct;
-    // } else if (event.target.classList.contains('prev')) {
-    //     console.log('previous');
-    //     currentProduct = (currentProduct - 1 + products.length) % length;
-    // }
     overlay.classList.remove('hidden');
     overlaySection.classList.remove('hidden');
 });
@@ -120,10 +158,6 @@ thumbnail.forEach((btn, index) => {
         }
     });
 });
-
-// window.addEventListener('click', () => {
-//     overlay.classList.add('hidden');
-// })
 
 const cartDetails = document.querySelector('.cart-details');
 cart.addEventListener('click', () => {
