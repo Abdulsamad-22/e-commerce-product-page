@@ -53,6 +53,10 @@ addToCart.addEventListener('click', () => {
         cartNumber.classList.add('hidden');
     }
     cartNumber.innerText = cartQuantity;
+
+    if (cartDetails && (cartQuantity > 0 || cartQuantity === 0)) {
+        cartSection.classList.add('hidden');
+    }
 });
 
 const thumbnail = document.querySelectorAll('.product-thumbnail');
@@ -106,6 +110,13 @@ const mainNext = document.getElementById('mainNext');
 const mainPrev = document.getElementById('mainPrev');
 
 mainNext.addEventListener('click', () => {
+    activeBg.forEach(bg => bg.classList.remove('opacity-80'));
+    
+    const overlay = document.querySelector('.active-bg');
+    if (overlay) {
+        overlay.classList.add('opacity-80');
+    }
+
     if (productImage) {
         i = (i + 1) % products.length;
         productImage.src = products[i];
@@ -113,66 +124,41 @@ mainNext.addEventListener('click', () => {
 });
 
 mainPrev.addEventListener('click', () => {
-    if (imageModal) {
+    if (productImage) {
         i = (i - 1 + products.length) % products.length;
         productImage.src = products[i];
     }
 });
 
-thumbnailModal.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-        thumbnailModal.forEach(btn => btn.classList.remove('active'));
-        btn.classList.add('active');
-
-        if (index === 0) {
-            imageModal.src = 'images/image-product-1.jpg';
-            console.log('item 1');
-        } else if (index === 1) {
-            imageModal.src = 'images/image-product-2.jpg';
-            console.log('item 2');
-        } else if (index === 2) {
-            imageModal.src = 'images/image-product-3.jpg';
-            console.log('item 3');
-        } else if (index === 3) {
-            imageModal.src = 'images/image-product-4.jpg';
-            console.log('item 4');
-        } else {
-            console.log("can't find product");
-        }
-    });
-});
+const modalActive = document.querySelectorAll('.modalActive');
 
 const activeBg = document.querySelectorAll('.active-bg');
 
-activeBg.forEach(bg => {
-    bg.addEventListener('click', () => {
-        activeBg.forEach(bg => bg.classList.remove('active-bg'));
-        bg.classList.add('active-bg');
-    });
-});
-    //btn.classList.add('active-bg');
-thumbnail.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-        thumbnail.forEach(btn => btn.classList.remove('active'));
-        btn.classList.add('active');
+function displayCurrentImage(thumbnail, activeBg, productImage, className= ".active-bg") {
+    thumbnail.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            thumbnail.forEach(btn => btn.classList.remove('active'));
+            btn.classList.add('active');
+    
+            activeBg.forEach(bg => bg.classList.remove('opacity-80'));
+    
+            const overlay = btn.querySelector(className);
+            if (overlay) {
+                overlay.classList.add('opacity-80');
+            }
 
-        if (index === 0) {
-            productImage.src = 'images/image-product-1.jpg';
-            console.log('item 1');
-        } else if (index === 1) {
-            productImage.src = 'images/image-product-2.jpg';
-            console.log('item 2');
-        } else if (index === 2) {
-            productImage.src = 'images/image-product-3.jpg';
-            console.log('item 3');
-        } else if (index === 3) {
-            productImage.src = 'images/image-product-4.jpg';
-            console.log('item 4');
-        } else {
-            console.log("can't find product");
-        }
+            if (index < products.length) {
+                productImage.src = products[index];
+                console.log(index);
+            } else {
+                console.log("can't find product");
+            }
+        });
     });
-});
+}
+
+displayCurrentImage(thumbnail, activeBg, productImage, className= ".active-bg");
+displayCurrentImage(thumbnailModal, modalActive, imageModal, className= ".modalActive");
 
 const cartDetails = document.querySelector('.cart-details');
 cart.addEventListener('click', () => {

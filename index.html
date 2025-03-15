@@ -20,23 +20,19 @@
     }
 
     .active {
-      /* background-color: #ffede0d8; */
       border: 2px solid #ff7d1a;
     } 
-
-    .active-bg {
-      background-color: #ffede0d8;
-    }
   </style>
 
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="flex flex-col items-center justify-center relative">
 
-  <div id="overlay" class="absolute flex justify-center items-center inset-o w-full h-full bg-[#0f0f0fce] hidden z-10"></div>
+  <div id="overlay" class="fixed w-screen h-screen flex justify-center items-center bg-[#0f0f0fce] hidden z-20"></div>
 
   <main class="mb-7">
-    <div class="flex flex-col mb-7 md:mb-10 px-0 pt-4 md:px-12 gap-1">
+    <!-- pt-4 -->
+    <div class="flex flex-col mb-7 md:mb-10 px-0 pt-5 md:pt-0 md:px-12 gap-1">
       <div class="flex px-4 w-full items-center justify-between">
           <!-- Left Section -->
           <div class="flex justify-center items-center gap-4 md:gap-0">
@@ -60,7 +56,8 @@
                       </button>
   
                       <!-- Menu Items -->
-                      <li class="py-3 px-4 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Collections</li>
+                      <li class="py-3 px-4 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Collections
+                      </li>
                       <li class="py-3 px-4 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Men</li>
                       <li class="py-3 px-4 cursor-pointer hover:border-b-2 border-[#ff7d1a]">Women</li>
                       <li class="py-3 px-4 cursor-pointer hover:border-b-2 border-[#ff7d1a]">About</li>
@@ -79,7 +76,7 @@
                           class="bg-[#ff7d1a] rounded-lg px-2 absolute -top-2 -right-2 min-h-[80%] text-[0.625rem] text-[#fff] hidden">0</span>
                   </div>
 
-                  <div id="open-cart" class="bg-[#fff] w-full absolute top-16 right-0 md:right-12 md:w-[25%] md:h-[28%] hidden z-10 shadow-lg shadow-gray-400/50 p-2">
+                  <div id="open-cart" class="bg-[#fff] w-[90%] absolute top-16 right-4 md:right-12 md:w-[25%] md:h-[28%] hidden z-10 shadow-lg shadow-gray-400/50 p-2">
                     <h3 class="pl-2 font-bold mb-6">Cart</h3>
                     <hr class="border-1 border-gray-200">
 
@@ -118,7 +115,7 @@
       <div class="flex justify-center hidden md:flex w-full md:w-[60%] gap-2 flex-1">
         <div 
           class="relative group product-thumbnail w-[50%] rounded-lg cursor-pointer">
-          <img class="rounded-lg hover:bg-[#ffede0]" src="images/image-product-1-thumbnail.jpg">
+          <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
 
           <div
             class="active-bg absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
@@ -127,7 +124,7 @@
 
         <div 
           class="relative group product-thumbnail w-[50%] rounded-lg cursor-pointer">
-          <img class="hover:bg-[#ffede0] rounded-lg" src="images/image-product-2-thumbnail.jpg">
+          <img class="rounded-lg" src="images/image-product-2-thumbnail.jpg">
 
           <div
             class="active-bg absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
@@ -135,12 +132,12 @@
         </div>
 
         <div 
-          class="relative group product-thumbnail w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+          class="relative group product-thumbnail w-[50%] rounded-lg cursor-pointer">
           <img class="rounded-lg" src="images/image-product-3-thumbnail.jpg">
 
           <div
-          class="active-bg absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
-        </div>
+            class="active-bg absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
+          </div>
         </div>
 
         <div 
@@ -182,7 +179,7 @@
         </div>
   
         <div class="flex flex-col md:flex-row gap-3 w-full">
-          <div id="addMinusContainer" class="flex items-center justify-between w-full md:w-1/3 gap-2 bg-[#ccc] px-5 py-2 rounded-lg">
+          <div id="addMinusContainer" class="flex items-center justify-between w-full md:w-1/3 gap-2 bg-[#ccc] px-5 py-4 md:py-2 rounded-lg">
             <span id="minus-btn" class="cursor-pointer">
               <img class="hover:text-[#fdb785]" src="images/icon-minus.svg" alt="minus icon to reduce cart">
             </span>
@@ -195,7 +192,7 @@
   
           <button id="add-to-cart"
             class="flex items-center justify-center gap-2 w-full 
-            rounded-lg font-semibold px-7 py-3 bg-[#ff7d1a] hover:bg-[#fdb785] cursor-pointer">
+            rounded-lg font-semibold px-7 py-4 md:py-3 bg-[#ff7d1a] hover:bg-[#fdb785] cursor-pointer">
             <img class="" src="images/icon-cart.svg" alt="cart icon">
             Add to cart
           </button>
@@ -206,7 +203,7 @@
 
 
     <section id="overlay-section" class="w-full h-full flex flex-col items-center justify-center hidden z-20 absolute left-20 top-10">
-      <div id="close-modal" class="w-1/3 flex justify-end mb-4">
+      <div id="close-modal" class="w-1/3 flex justify-end mb-4 cursor-pointer">
         <img class="w-[20px]" src="images/icon-close.svg" alt="close icon">
       </div>
 
@@ -214,34 +211,50 @@
         <div class="w-full rounded-lg relative">
           <img id="product2" class="product-image rounded-lg" src="images/image-product-1.jpg" alt="product 1 image">
 
-          <div id="prev" class="absolute flex items-center justify-center w-12 h-12 pr-5 -left-4 top-40 bg-[#fff] p-4 rounded-full">
+          <div id="prev" class="absolute flex items-center justify-center w-12 h-12 pr-5 -left-4 top-40 bg-[#fff] p-4 rounded-full cursor-pointer">
             <img id="prev" src="images/icon-previous.svg" alt="icon previous">
           </div>
 
-          <div id="next" class="absolute flex items-center justify-center w-12 h-12 pl-5 -right-4 top-40 bg-[#fff] p-4 rounded-full">
+          <div id="next" class="absolute flex items-center justify-center w-12 h-12 pl-5 -right-4 top-40 bg-[#fff] p-4 rounded-full cursor-pointer">
             <img id="next" src="images/icon-next.svg" alt="icon-next">
           </div>
         </div>
   
         <div class="flex justify-center w-[80%] gap-2 flex-1">
           <div id="product-thumbnail-modal" 
-            class="w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
-            <img class="product-thumbnail-modal rounded-lg" src="images/image-product-1-thumbnail.jpg">
+            class="product-thumbnail-modal group w-[50%] rounded-lg cursor-pointer relative">
+            <img class="rounded-lg" src="images/image-product-1-thumbnail.jpg">
+
+            <div
+            class="modalActive absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
+          </div>
           </div>
   
           <div id="product-thumbnail-modal" 
-            class="product-thumbnail-modal w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+            class="product-thumbnail-modal group w-[50%] rounded-lg cursor-pointer relative">
             <img class="rounded-lg" src="images/image-product-2-thumbnail.jpg">
+
+              <div
+              class="modalActive absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
+            </div>
           </div>
   
           <div id="product-thumbnail-modal" 
-            class="product-thumbnail-modal w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+            class="product-thumbnail-modal group w-[50%] rounded-lg cursor-pointer relative">
             <img class="rounded-lg" src="images/image-product-3-thumbnail.jpg">
+
+              <div 
+              class="modalActive absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
+            </div>
           </div>
   
           <div id="product-thumbnail-modal" 
-            class="product-thumbnail-modal w-[50%] rounded-lg hover:bg-[#ffede0] cursor-pointer">
+            class="product-thumbnail-modal group w-[50%] rounded-lg cursor-pointer relative">
             <img class="rounded-lg" src="images/image-product-4-thumbnail.jpg">
+
+              <div 
+              class="modalActive absolute inset-0 bg-[#ffede0] opacity-0 group-hover:opacity-80 transition-opacity duration-300 rounded-lg">
+            </div>
           </div>
         </div>
       </div>
