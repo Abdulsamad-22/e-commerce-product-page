@@ -166,10 +166,11 @@ cart.addEventListener('click', () => {
 
     if (cartDetails) {
         if (cartQuantity === 0) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.classList.add('empty');
+            emptyMessage.textContent = 'Your Cart is Empty';
             // const totalPrice = ;
-        cartDetails.innerHTML = `
-            Your Cart is Empty
-        `;
+        cartDetails.innerHTML = emptyMessage.textContent;
         } else if (cartQuantity > 0) {
             let HTML = `
                 <div class="flex justify-between items-center mb-4">
@@ -179,11 +180,11 @@ cart.addEventListener('click', () => {
                         </div>
         
                         <div>
-                            <p>
+                            <p class="text-[#818181]">
                                 Fall Limited Edition Sneakers
                             </p>
             
-                            <p><span class="qtyAndPrice">$125.00 x${cartQuantity}</span> <span class="total-price font-semibold">$${(Number(125 * cartQuantity)).toFixed(2)}</span>
+                            <p><span class="qtyAndPrice text-[#818181]">$125.00 x${cartQuantity}</span> <span class="total-price font-semibold">$${(Number(125 * cartQuantity)).toFixed(2)}</span>
                             </p>
                         </div>
                     </div>
