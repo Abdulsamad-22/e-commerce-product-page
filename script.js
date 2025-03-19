@@ -235,7 +235,16 @@ function resizeWindow() {
                 overlay.classList.remove('hidden');
                 overlaySection.classList.remove('hidden');
             });
-        }    
+        } 
+        
+        overlay.addEventListener('click', () => {
+            if (overlay) {
+                overlay.classList.add('hidden');
+                navBar.classList.add('hidden');
+                overlay.classList.add('hidden');
+            }
+        });
+        
     } else if (window.innerWidth >= 768) {
         if (productImage) {
             productImage.addEventListener('click', (event) => {
